@@ -16,7 +16,7 @@ class TiersPlugin : JavaPlugin() {
         val tierSize = config.getInt("tierSize")
 
         // Generate data model.
-        val model = TierModel(tierInterval, tierSize, path);
+        val model = TierModel(handler, tierInterval, tierSize, path);
 
         // If we get this far, plugin is successfully enabled!
         handler.info("Enabled")

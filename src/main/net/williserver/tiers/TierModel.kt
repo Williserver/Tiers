@@ -13,13 +13,14 @@ import java.io.File
  */
 
 // Data model: file abstraction
-class TierModel(private val tierInterval: Int, private val tierSize: Int, private var path: String) {
+class TierModel(private val logger: LogHandler, private val tierInterval: Int, private val tierSize: Int, private var path: String) {
     // Read in values from file if they exist.
     init {
         val data = File(path)
         // For now, build the file if it doesn't exist.
         if (!data.exists()) {
             data.createNewFile()
+            logger.info("Creating new file")
         }
     }
 
