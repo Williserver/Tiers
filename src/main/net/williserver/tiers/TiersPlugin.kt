@@ -2,12 +2,17 @@ package net.williserver.tiers
 
 import org.bukkit.plugin.java.JavaPlugin
 
+/**
+ * TiersPlugin. Allows for configurable rescaling of world border as more players join.
+ *
+ * @author Willmo3
+ */
 class TiersPlugin : JavaPlugin() {
     private val handler = LogHandler(super.getLogger())
     // Default path for this baby.
     private val path = "$dataFolder/tiers.json"
     // Model initialized after config loaded.
-    private lateinit var model: TierModel;
+    private lateinit var model: TierModel
 
     override fun onEnable() {
         // Save config with defaults if not present.
@@ -18,7 +23,7 @@ class TiersPlugin : JavaPlugin() {
         val tierSize = config.getInt("tierSize")
 
         // Generate data model.
-        model = TierModel(handler, tierInterval, tierSize, path);
+        model = TierModel(handler, tierInterval, tierSize, path)
 
         // If we get this far, plugin is successfully enabled!
         handler.info("Enabled")
