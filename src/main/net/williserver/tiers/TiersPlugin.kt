@@ -26,7 +26,7 @@ class TiersPlugin : JavaPlugin() {
         // Generate data model.
         model = TierModel(handler, tierInterval, tierSize, path)
         // Set border width based on starting player count.
-        Bukkit.getServer().dispatchCommand(Bukkit.getServer().consoleSender, "worldborder set ${model.border_width()}")
+        Bukkit.getServer().dispatchCommand(Bukkit.getServer().consoleSender, "worldborder set ${model.borderWidth()}")
 
         // Add player join listener.
         val joiner = JoinListener(handler, model)
