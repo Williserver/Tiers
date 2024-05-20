@@ -6,6 +6,14 @@ class TiersPlugin : JavaPlugin() {
     private val handler = LogHandler(super.getLogger())
 
     override fun onEnable() {
+        // Save config with defaults if not present.
+        saveDefaultConfig()
+
+        // Load config file.
+        val tierInterval = config.getInt("tierInterval")
+        val tierSize = config.getInt("tierSize")
+
+        // If we get this far, plugin is successfully enabled!
         handler.info("Enabled")
     }
 
