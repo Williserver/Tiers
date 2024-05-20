@@ -5,7 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin
 class TiersPlugin : JavaPlugin() {
     private val handler = LogHandler(super.getLogger())
     // Default path for this baby.
-    private val path = "tiers.json"
+    private val path = "$dataFolder/tiers.json"
 
     override fun onEnable() {
         // Save config with defaults if not present.

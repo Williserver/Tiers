@@ -1,5 +1,7 @@
 package net.williserver.tiers
 
+import java.io.File
+
 /**
  * The TierModel represents which tier we're in.
  *
@@ -12,6 +14,15 @@ package net.williserver.tiers
 
 // Data model: file abstraction
 class TierModel(private val tierInterval: Int, private val tierSize: Int, private var path: String) {
+    // Read in values from file if they exist.
+    init {
+        val data = File(path)
+        // For now, build the file if it doesn't exist.
+        if (!data.exists()) {
+            data.createNewFile()
+        }
+    }
+
     // Need method to read in the model.
 
     // Need method to write out the model.
