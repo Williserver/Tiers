@@ -18,12 +18,13 @@ import java.io.FileWriter
 // Data model: file abstraction
 class TierModel(private val logger: LogHandler, private val tierInterval: Int, private val tierSize: Int, private var path: String) {
     // If file doesn't exist, initialize default tier -- 1u
-    val currentTier: UInt =
+    var currentTier: UInt =
         if (File(path).exists()) {
             Gson().fromJson(FileReader(path).readText(), UInt::class.java)
         } else {
             1u
         }
+        private set
 
     init {
         logger.info("Initialized with tier: $currentTier")
@@ -37,5 +38,12 @@ class TierModel(private val logger: LogHandler, private val tierInterval: Int, p
         val writer = FileWriter(path)
         Gson().toJson(currentTier, writer)
         writer.close()
+    }
+
+    /**
+     * Increment the tier used in this model.
+     */
+    fun increment_tier() {
+        currentTier += 1u
     }
 }

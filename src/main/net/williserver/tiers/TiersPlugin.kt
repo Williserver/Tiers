@@ -27,6 +27,7 @@ class TiersPlugin : JavaPlugin() {
     override fun onDisable() {
         // Serialize model settings.
         model.serialize()
+        handler.info("Wrote data")
         handler.info("Disabled")
     }
 }
