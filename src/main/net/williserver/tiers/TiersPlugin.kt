@@ -6,6 +6,8 @@ class TiersPlugin : JavaPlugin() {
     private val handler = LogHandler(super.getLogger())
     // Default path for this baby.
     private val path = "$dataFolder/tiers.json"
+    // Model initialized after config loaded.
+    private lateinit var model: TierModel;
 
     override fun onEnable() {
         // Save config with defaults if not present.
@@ -16,13 +18,15 @@ class TiersPlugin : JavaPlugin() {
         val tierSize = config.getInt("tierSize")
 
         // Generate data model.
-        val model = TierModel(handler, tierInterval, tierSize, path);
+        model = TierModel(handler, tierInterval, tierSize, path);
 
         // If we get this far, plugin is successfully enabled!
         handler.info("Enabled")
     }
 
     override fun onDisable() {
+        // Serialize model settings.
+        model.serialize()
         handler.info("Disabled")
     }
 }

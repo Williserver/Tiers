@@ -1,6 +1,9 @@
 package net.williserver.tiers
 
 import java.io.File
+import com.google.gson.Gson
+import java.io.FileReader
+import java.io.FileWriter
 
 /**
  * The TierModel represents which tier we're in.
@@ -14,18 +17,25 @@ import java.io.File
 
 // Data model: file abstraction
 class TierModel(private val logger: LogHandler, private val tierInterval: Int, private val tierSize: Int, private var path: String) {
-    val currentTier: UInt
-
-    // Read in values from file if they exist.
-    init {
-        val data = File(path)
-
-        // If file doesn't exist, initialize default tier -- 1u
-        if (!data.exists()) {
-            currentTier = 1u
-        // If file does exist, load in via GSON
+    // If file doesn't exist, initialize default tier -- 1u
+    val currentTier: UInt =
+        if (File(path).exists()) {
+            Gson().fromJson(FileReader(path).readText(), UInt::class.java)
         } else {
-            currentTier = 1u
+            1u
         }
+
+    init {
+        logger.info("Initialized with tier: $currentTier")
+    }
+
+    /**
+     * Serialize this file to our path.
+     */
+    fun serialize() {
+        // Open file.
+        val writer = FileWriter(path)
+        Gson().toJson(currentTier, writer)
+        writer.close()
     }
 }
