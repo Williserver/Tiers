@@ -28,6 +28,9 @@ class JoinListener(private val logger: LogHandler, private val model: TierModel)
             model.increment_tier()
             logger.info("$numPlayers online. Tier ${model.currentTier} unlocked!")
             Bukkit.broadcast(Component.text("[TIERS]: $numPlayers online. Tier ${model.currentTier} unlocked!", NamedTextColor.DARK_RED))
+
+            // Increase radius of border to match.
+            Bukkit.getServer().dispatchCommand(Bukkit.getServer().consoleSender, "worldborder set ${model.border_width()}")
         }
     }
 }

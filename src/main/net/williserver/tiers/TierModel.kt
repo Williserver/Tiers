@@ -46,6 +46,11 @@ class TierModel(private val logger: LogHandler, val tierInterval: Int, val tierS
     fun players_for_next_tier(): UInt = (currentTier + 1u) * tierInterval.toUInt()
 
     /**
+     * Get the border width for this tiermodel.
+     */
+    fun border_width(): UInt = currentTier * tierSize.toUInt()
+
+    /**
      * Increment the tier used in this model.
      */
     fun increment_tier() {
