@@ -41,6 +41,11 @@ class TierModel(private val logger: LogHandler, val tierInterval: Int, val tierS
     }
 
     /**
+     * Return the number of players needed to reach the next tier.
+     */
+    fun players_for_next_tier(): UInt = (currentTier + 1u) * tierInterval.toUInt()
+
+    /**
      * Increment the tier used in this model.
      */
     fun increment_tier() {

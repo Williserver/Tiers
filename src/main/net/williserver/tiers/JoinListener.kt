@@ -21,11 +21,10 @@ class JoinListener(private val logger: LogHandler, private val model: TierModel)
         val numPlayers = Bukkit.getOnlinePlayers().size
         logger.info("$numPlayers online")
 
-        val nextTier = (model.currentTier + 1u) * model.tierInterval.toUInt()
-        logger.info("Need $nextTier players to unlock next tier")
+        logger.info("Need ${model.players_for_next_tier()} players to unlock next tier")
 
         // Check if we need to increment the interval.
-        if (numPlayers.toUInt() >= nextTier) {
+        if (numPlayers.toUInt() >= model.players_for_next_tier()) {
             model.increment_tier()
             logger.info("$numPlayers online. Tier ${model.currentTier} unlocked!")
             Bukkit.broadcast(Component.text("[TIERS]: $numPlayers online. Tier ${model.currentTier} unlocked!", NamedTextColor.DARK_RED))
