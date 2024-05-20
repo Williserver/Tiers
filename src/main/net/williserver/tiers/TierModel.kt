@@ -14,19 +14,18 @@ import java.io.File
 
 // Data model: file abstraction
 class TierModel(private val logger: LogHandler, private val tierInterval: Int, private val tierSize: Int, private var path: String) {
+    val currentTier: UInt
+
     // Read in values from file if they exist.
     init {
         val data = File(path)
-        // For now, build the file if it doesn't exist.
+
+        // If file doesn't exist, initialize default tier -- 1u
         if (!data.exists()) {
-            data.createNewFile()
-            logger.info("Creating new file")
+            currentTier = 1u
+        // If file does exist, load in via GSON
+        } else {
+            currentTier = 1u
         }
     }
-
-    // Need method to read in the model.
-
-    // Need method to write out the model.
-
-    // Will need to reset the worldborder on each load -- in case things change.
 }
