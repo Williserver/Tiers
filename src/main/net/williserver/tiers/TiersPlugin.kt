@@ -16,17 +16,23 @@ class TiersPlugin : JavaPlugin() {
     // Name of LuckPerms plugin
     private val luckName = "LuckPerms"
 
+    // ***** CONFIG FIELDS ***** //
+    private val tierIntervalOption = "tierInterval"
+    private val tierSizeOption = "tierSize"
+    private val trackNameOption= "trackName"
+    private val useRanksOption = "tierRanks"
+
     override fun onEnable() {
         // ***** LOAD CONFIG ***** //
 
         // Save config with defaults if not present.
         saveDefaultConfig()
         // Load config file.
-        val tierInterval = config.getInt("tierInterval")
-        val tierSize = config.getInt("tierSize")
+        val tierInterval = config.getInt(tierIntervalOption)
+        val tierSize = config.getInt(tierSizeOption)
         // TrackName not optional!
-        val trackName = config.getString("trackName")!!
-        val useRanks = config.getBoolean("useRanks")
+        val trackName = config.getString(trackNameOption)!!
+        val useRanks = config.getBoolean(useRanksOption)
 
         // ***** PREPARE MODEL ***** //
 
