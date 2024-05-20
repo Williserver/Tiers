@@ -48,7 +48,7 @@ class TierModel(private val logger: LogHandler, val tierInterval: Int, val tierS
     /**
      * Return the number of players needed to reach the next tier.
      */
-    fun playersForNextTier(): UInt = (currentTier + 1u) * tierInterval.toUInt()
+    fun playersForNextTier(): UInt = currentTier * tierInterval.toUInt()
 
     /**
      * Get the border width for this tiermodel.
