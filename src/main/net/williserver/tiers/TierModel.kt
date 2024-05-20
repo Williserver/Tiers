@@ -16,7 +16,7 @@ import java.io.FileWriter
  */
 
 // Data model: file abstraction
-class TierModel(private val logger: LogHandler, private val tierInterval: Int, private val tierSize: Int, private var path: String) {
+class TierModel(private val logger: LogHandler, val tierInterval: Int, val tierSize: Int, private var path: String) {
     // If file doesn't exist, initialize default tier -- 1u
     var currentTier: UInt =
         if (File(path).exists()) {

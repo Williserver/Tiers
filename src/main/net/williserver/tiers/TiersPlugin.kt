@@ -25,6 +25,11 @@ class TiersPlugin : JavaPlugin() {
         // Generate data model.
         model = TierModel(handler, tierInterval, tierSize, path)
 
+        // Add player join listener.
+        val joiner = JoinListener(handler, model)
+        server.pluginManager.registerEvents(joiner, this)
+        handler.info("Register tiers join listener.")
+
         // If we get this far, plugin is successfully enabled!
         handler.info("Enabled")
     }
