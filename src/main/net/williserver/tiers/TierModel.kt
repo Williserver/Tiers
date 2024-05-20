@@ -5,13 +5,13 @@ package net.williserver.tiers
  *
  * @param tierInterval number of players per tier.
  * @param tierSize Size of a single tier
- * @param currentTier tier we're in. This changes.
+ * @param path Path to load saved data from, if it exists.
  *
  * @author Willmo3
  */
 
 // Data model: file abstraction
-class TierModel(private val tierInterval: UInt, private val tierSize: UInt, private var path: String) {
+class TierModel(private val tierInterval: Int, private val tierSize: Int, private var path: String) {
     // Need method to read in the model.
 
     // Need method to write out the model.
