@@ -1,6 +1,5 @@
 package net.williserver.tiers
 
-import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
 /**
@@ -26,7 +25,7 @@ class TiersPlugin : JavaPlugin() {
         // Generate data model.
         model = TierModel(handler, tierInterval, tierSize, path)
         // Set border width based on starting player count.
-        Bukkit.getServer().dispatchCommand(Bukkit.getServer().consoleSender, "worldborder set ${model.borderWidth()}")
+        setBorderWidth(model.borderWidth())
 
         // Add player join listener.
         val joiner = JoinListener(handler, model)
