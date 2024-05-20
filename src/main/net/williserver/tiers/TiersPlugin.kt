@@ -26,6 +26,7 @@ class TiersPlugin : JavaPlugin() {
         val tierSize = config.getInt("tierSize")
         // TrackName not optional!
         val trackName = config.getString("trackName")!!
+        val useRanks = config.getBoolean("useRanks")
 
         // ***** PREPARE MODEL ***** //
 
@@ -35,14 +36,12 @@ class TiersPlugin : JavaPlugin() {
         setBorderWidth(model.borderWidth())
 
         // ***** LUCKPERMS INTEGRATION ***** //
-
-        // If LuckPerms present, execute rank commands.
-        val luckPresent = server.pluginManager.getPlugin(luckName) != null
+        val useLuck = useRanks && server.pluginManager.getPlugin(luckName) != null
 
         // ***** PREPARE LISTENER ***** //
 
         // Add player join listener.
-        val joiner = JoinListener(handler, luckPresent, model, trackName)
+        val joiner = JoinListener(handler, useLuck, model, trackName)
         server.pluginManager.registerEvents(joiner, this)
         handler.info("Register tiers join listener.")
 

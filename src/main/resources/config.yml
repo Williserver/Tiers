@@ -6,6 +6,10 @@ tierInterval: 1
 # How many blocks to increase border radius by per tier.
 tierSize: 500
 
+# Should we try to use tier ranks with LuckPerms integration?
+# This entails adding a new track for tiers and ranks for the various tiers.
+tierRanks: True
+
 # For LuckPerms integration: what track should we place tier ranks in?
 # You should create this track yourself!
 # No need to modify if not using LuckPerms.
