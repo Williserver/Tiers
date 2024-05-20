@@ -13,11 +13,11 @@ import org.bukkit.event.player.PlayerJoinEvent
  *
  * @author Willmo3
  */
-class JoinListener(val logger: LogHandler, val model: TierModel): Listener {
+class JoinListener(private val logger: LogHandler, private val model: TierModel): Listener {
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {
-        // Increment the tier if possible.
+        // Increment the tier if player cap reached.
         val numPlayers = Bukkit.getOnlinePlayers().size
         logger.info("$numPlayers online")
 
