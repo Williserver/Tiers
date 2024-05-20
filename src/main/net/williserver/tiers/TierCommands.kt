@@ -10,12 +10,12 @@ import org.bukkit.Bukkit
 fun setBorderWidth(width: UInt) = runCommand("worldborder set $width")
 
 /**
- * Add a player to the specified tier.
+ * Join a player in the specified tier.
  *
  * @param tier tier to add player to
  * @param player username of player
  */
-fun addCurrentTier(tier: UInt, player: String) = runCommand("lp user $player parent set t$tier")
+fun playerJoinTier(tier: UInt, player: String) = runCommand("lp user $player parent add t$tier")
 
 /**
  * Create a new tier group.
@@ -23,9 +23,13 @@ fun addCurrentTier(tier: UInt, player: String) = runCommand("lp user $player par
  * @param tier Tier to use.
  */
 fun createTierGroup(tier: UInt) {
+    // Name of new group to be created.
     val groupname = "t$tier"
+    // Name of luckperms track for tiers.
+    val trackname = "tiers"
 
     runCommand("lp creategroup $groupname")
+    runCommand("lp track $trackname append $groupname")
     // Give prefixes priority $tier.
     // NOTE: Server should be configured to display lower tiers first!
     runCommand("lp group $groupname meta addprefix $tier &7[$groupname]")

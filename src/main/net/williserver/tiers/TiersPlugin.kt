@@ -17,23 +17,30 @@ class TiersPlugin : JavaPlugin() {
     private val luckName = "LuckPerms"
 
     override fun onEnable() {
-        // If LuckPerms present, execute rank commands.
-        val luckPresent = server.pluginManager.getPlugin(luckName) != null
+        // ***** LOAD CONFIG ***** //
 
         // Save config with defaults if not present.
         saveDefaultConfig()
-
         // Load config file.
         val tierInterval = config.getInt("tierInterval")
         val tierSize = config.getInt("tierSize")
+
+        // ***** PREPARE MODEL ***** //
 
         // Generate data model.
         model = TierModel(handler, tierInterval, tierSize, path)
         // Set border width based on starting player count.
         setBorderWidth(model.borderWidth())
 
+        // ***** LUCKPERMS INTEGRATION ***** //
+
+        // If LuckPerms present, execute rank commands.
+        val luckPresent = server.pluginManager.getPlugin(luckName) != null
+
+        // ***** PREPARE LISTENER ***** //
+
         // Add player join listener.
-        val joiner = JoinListener(handler, model)
+        val joiner = JoinListener(handler, luckPresent, model)
         server.pluginManager.registerEvents(joiner, this)
         handler.info("Register tiers join listener.")
 

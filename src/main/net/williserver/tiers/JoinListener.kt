@@ -13,14 +13,22 @@ import org.bukkit.event.player.PlayerJoinEvent
  *
  * @author Willmo3
  */
-class JoinListener(private val logger: LogHandler, private val model: TierModel): Listener {
+class JoinListener(private val logger: LogHandler,
+                   private val luckPresent: Boolean,
+                   private val model: TierModel): Listener {
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {
+        // Join player to rank if possible
+        if (luckPresent) {
+            // attempt to create a tier group whenever a player joins.
+            createTierGroup(model.currentTier)
+            playerJoinTier(model.currentTier, e.player.name)
+        }
+
         // Increment the tier if player cap reached.
         val numPlayers = Bukkit.getOnlinePlayers().size
         logger.info("$numPlayers online")
-
         logger.info("Need ${model.playersForNextTier()} players to unlock next tier")
 
         // Check if we need to increment the interval.
@@ -30,7 +38,7 @@ class JoinListener(private val logger: LogHandler, private val model: TierModel)
             Bukkit.broadcast(Component.text("[TIERS]: $numPlayers online. Tier ${model.currentTier} unlocked!", NamedTextColor.DARK_RED))
 
             // Increase radius of border to match.
-            setBorderWidth(model.borderWidth());
+            setBorderWidth(model.borderWidth())
         }
     }
 }
