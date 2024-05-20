@@ -24,6 +24,8 @@ class TiersPlugin : JavaPlugin() {
         // Load config file.
         val tierInterval = config.getInt("tierInterval")
         val tierSize = config.getInt("tierSize")
+        // TrackName not optional!
+        val trackName = config.getString("trackName")!!
 
         // ***** PREPARE MODEL ***** //
 
@@ -40,7 +42,7 @@ class TiersPlugin : JavaPlugin() {
         // ***** PREPARE LISTENER ***** //
 
         // Add player join listener.
-        val joiner = JoinListener(handler, luckPresent, model)
+        val joiner = JoinListener(handler, luckPresent, model, trackName)
         server.pluginManager.registerEvents(joiner, this)
         handler.info("Register tiers join listener.")
 
