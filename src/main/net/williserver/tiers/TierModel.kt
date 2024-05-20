@@ -4,6 +4,7 @@ import java.io.File
 import com.google.gson.Gson
 import java.io.FileReader
 import java.io.FileWriter
+import kotlin.math.max
 
 /**
  * The TierModel represents which tier we're in.
@@ -52,12 +53,7 @@ class TierModel(private val logger: LogHandler, val tierInterval: Int, val tierS
     /**
      * Get the border width for this tiermodel.
      */
-    fun border_width(): UInt =
-        if (currentTier * tierSize.toUInt() > 0u) {
-            currentTier * tierSize.toUInt()
-        } else {
-            defaultWidth
-        }
+    fun border_width(): UInt = max(currentTier * tierSize.toUInt(), defaultWidth)
 
     /**
      * Increment the tier used in this model.
