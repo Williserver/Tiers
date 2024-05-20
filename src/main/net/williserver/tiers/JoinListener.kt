@@ -1,5 +1,7 @@
 package net.williserver.tiers
 
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -12,8 +14,10 @@ import org.bukkit.event.player.PlayerJoinEvent
  * @author Willmo3
  */
 class JoinListener(val logger: LogHandler, val model: TierModel): Listener {
+
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {
+        // Increment the tier if possible.
         val numPlayers = Bukkit.getOnlinePlayers().size
         logger.info("$numPlayers online")
 
@@ -22,8 +26,9 @@ class JoinListener(val logger: LogHandler, val model: TierModel): Listener {
 
         // Check if we need to increment the interval.
         if (numPlayers.toUInt() >= nextTier) {
-            logger.info("$numPlayers joined -- moving to next tier!")
             model.increment_tier()
+            logger.info("$numPlayers online. Tier ${model.currentTier} unlocked!")
+            Bukkit.broadcast(Component.text("[TIERS]: $numPlayers online. Tier ${model.currentTier} unlocked!", NamedTextColor.DARK_RED))
         }
     }
 }
