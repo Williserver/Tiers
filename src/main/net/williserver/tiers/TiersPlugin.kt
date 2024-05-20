@@ -13,8 +13,13 @@ class TiersPlugin : JavaPlugin() {
     private val path = "$dataFolder/tiers.json"
     // Model initialized after config loaded.
     private lateinit var model: TierModel
+    // Name of LuckPerms plugin
+    private val luckName = "LuckPerms"
 
     override fun onEnable() {
+        // If LuckPerms present, execute rank commands.
+        val luckPresent = server.pluginManager.getPlugin(luckName) != null
+
         // Save config with defaults if not present.
         saveDefaultConfig()
 
