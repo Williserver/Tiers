@@ -1,5 +1,6 @@
 package net.williserver.tiers
 
+import org.apache.commons.lang3.ObjectUtils.Null
 import org.bukkit.plugin.java.JavaPlugin
 
 /**
@@ -22,16 +23,44 @@ class TiersPlugin : JavaPlugin() {
     private val trackNameOption= "trackName"
     private val useRanksOption = "tierRanks"
 
+    // Config defaults
+    private val defaultTierInterval = 10
+    private val defaultTierSize = 500
+    private val defaultTrackName = "tiers"
+
     override fun onEnable() {
         // ***** LOAD CONFIG ***** //
 
         // Save config with defaults if not present.
         saveDefaultConfig()
+
         // Load config file.
-        val tierInterval = config.getInt(tierIntervalOption)
-        val tierSize = config.getInt(tierSizeOption)
+        val loadedInterval = config.getInt(tierIntervalOption)
+        val tierInterval = if (loadedInterval >= 1) {
+            loadedInterval
+        } else {
+            handler.err("Tier interval $loadedInterval too small, must be at least one.")
+            defaultTierInterval
+        }
+
+        val loadedSize = config.getInt(tierSizeOption)
+        val tierSize = if (loadedSize >= 1) {
+            loadedSize
+        } else {
+            handler.err("loaded tier size $loadedSize too small, must be at least one.")
+            defaultTierSize
+        }
+
         // TrackName not optional!
-        val trackName = config.getString(trackNameOption)!!
+        val loadedTrackName = config.getString(trackNameOption)
+        val trackName = if (loadedTrackName != null) {
+            loadedTrackName
+        } else {
+            handler.err("Track name not specified!")
+            defaultTrackName
+        }
+
+        // This will default to false.
         val useRanks = config.getBoolean(useRanksOption)
 
         // ***** PREPARE MODEL ***** //
