@@ -9,7 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration
  * @param config Configuration file to parse options from.
  * @author Willmo3
  */
-class TierConfig(private val handler: LogHandler, private val config: FileConfiguration) {
+data class TierConfig(private val handler: LogHandler, private val config: FileConfiguration) {
     // ***** CONFIG FIELDS ***** //
     private val tierIntervalOption = "tierInterval"
     private val tierSizeOption = "tierSize"
