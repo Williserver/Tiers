@@ -35,8 +35,10 @@ class JoinListener(private val logger: LogHandler,
         // Check if we need to increment the interval.
         if (numPlayers.toUInt() >= model.playersForNextTier()) {
             model.incrementTier()
-            logger.info("$numPlayers online. Tier ${model.currentTier} unlocked!")
-            Bukkit.broadcast(Component.text("[TIERS]: $numPlayers online. Tier ${model.currentTier} unlocked!", NamedTextColor.DARK_RED))
+            logger.info("$numPlayers online. Tier ${model.currentTier} unl  ocked!")
+
+            Bukkit.broadcast(Component.text("[TIERS]: $numPlayers online. Worldborder increased to ${model.borderWidth()}!", NamedTextColor.DARK_RED))
+            Bukkit.broadcast(Component.text("[TIERS]: ${model.playersForNextTier()} players needed to reach tier ${model.currentTier + 1u}", NamedTextColor.DARK_RED))
 
             // Increase radius of border to match.
             setBorderWidth(model.borderWidth())
