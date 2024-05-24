@@ -13,8 +13,9 @@ data class TierConfig(private val handler: LogHandler, private val config: FileC
     // ***** CONFIG FIELDS ***** //
     private val tierIntervalOption = "tierInterval"
     private val tierSizeOption = "tierSize"
-    private val trackNameOption= "trackName"
+    private val usePrefixOption = "usePrefix"
     private val useRanksOption = "tierRanks"
+    private val trackNameOption= "trackName"
 
     // Config defaults
     private val defaultTierInterval = 10
@@ -24,8 +25,9 @@ data class TierConfig(private val handler: LogHandler, private val config: FileC
     // Loaded fields
     val tierInterval: Int
     val tierSize: Int
-    val trackName: String
     val useRanks: Boolean
+    val usePrefix: Boolean
+    val trackName: String
 
     init {
         // Load config file.
@@ -54,7 +56,8 @@ data class TierConfig(private val handler: LogHandler, private val config: FileC
             defaultTrackName
         }
 
-        // This will default to false.
+        // Loading booleans defaults to false
         useRanks = config.getBoolean(useRanksOption)
+        usePrefix = config.getBoolean(usePrefixOption)
     }
 }

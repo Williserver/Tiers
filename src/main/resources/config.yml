@@ -10,6 +10,10 @@ tierSize: 1000
 # This entails adding a new track for tiers and ranks for the various tiers.
 tierRanks: True
 
+# Should we automatically apply a prefix to new groups?
+# Disable if you want to manually format your group's prefixes.
+usePrefix: True
+
 # For LuckPerms integration: what track should we place tier ranks in?
 # You should create this track yourself!
 # No need to modify if not using LuckPerms.

@@ -16,14 +16,14 @@ import org.bukkit.event.player.PlayerJoinEvent
 class JoinListener(private val logger: LogHandler,
                    private val useLuck: Boolean,
                    private val model: TierModel,
-                   private val trackName: String): Listener {
+                   private val config: TierConfig): Listener {
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {
         // Join player to rank if possible
         if (useLuck) {
             // attempt to create a tier group whenever a player joins.
-            createTierGroup(model.currentTier, trackName)
+            createTierGroup(model.currentTier, config)
             playerJoinTier(model.currentTier, e.player.name)
         }
 
@@ -35,7 +35,7 @@ class JoinListener(private val logger: LogHandler,
         // Check if we need to increment the interval.
         if (numPlayers.toUInt() >= model.playersForNextTier()) {
             model.incrementTier()
-            logger.info("$numPlayers online. Tier ${model.currentTier} unl  ocked!")
+            logger.info("$numPlayers online. Tier ${model.currentTier} unlocked!")
 
             Bukkit.broadcast(Component.text("[TIERS]: $numPlayers online. Worldborder increased to ${model.borderWidth()}!", NamedTextColor.DARK_RED))
             Bukkit.broadcast(Component.text("[TIERS]: ${model.playersForNextTier()} players needed to reach tier ${model.currentTier + 1u}", NamedTextColor.DARK_RED))

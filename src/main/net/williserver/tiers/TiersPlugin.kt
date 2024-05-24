@@ -30,7 +30,7 @@ class TiersPlugin : JavaPlugin() {
         val useLuck = config.useRanks && server.pluginManager.getPlugin(luckName) != null
 
         // Add player join listener.
-        val joiner = JoinListener(handler, useLuck, model, config.trackName)
+        val joiner = JoinListener(handler, useLuck, model, config)
         server.pluginManager.registerEvents(joiner, this)
         handler.info("Register tiers join listener.")
 
