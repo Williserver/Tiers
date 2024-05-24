@@ -27,9 +27,10 @@ class TiersTabCompleter: TabCompleter {
         // Add all possible suggestions for when the user hasn't typed anything.
         if (args.size == 1) {
             completions.add("get")
+            completions.add("set")
             completions.removeAll{ !it.startsWith(args[0].lowercase()) }
         }
-        
+
         return completions
     }
 }
