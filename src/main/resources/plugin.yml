@@ -8,5 +8,9 @@ commands:
   tiers:
     description: Execute tiers function helpers.
     usage: "Usage: /tiers [get]"
-    permission:
+
+permissions:
+  tiers.set:
+    description: Allows /tiers set
+    default: op
   

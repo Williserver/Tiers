@@ -28,7 +28,7 @@ class TierModel(logger: LogHandler, private val config: TierConfig, private var 
         } else {
             defaultTier
         }
-        private set
+        internal set
 
     // On init, log tier being used.
     init {

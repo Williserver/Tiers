@@ -1,5 +1,8 @@
 package net.williserver.tiers.commands
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import net.williserver.tiers.model.TierConfig
+import net.williserver.tiers.model.TierModel
 import org.bukkit.Bukkit
 
 /**
@@ -8,6 +11,18 @@ import org.bukkit.Bukkit
  *
  * @author Willmo3
  */
+
+/**
+ * Announce a change to the server size
+ * Using the current model.
+ *
+ * @param model Model to use.
+ */
+fun changeTier(model: TierModel) {
+    // Increase radius of border to match.
+    setBorderWidth(model.borderWidth())
+    Bukkit.broadcast(Component.text("[TIERS]: Switching to tier ${model.currentTier}", NamedTextColor.DARK_RED))
+}
 
 /**
  * Set the border width of the server.
@@ -50,3 +65,4 @@ fun createTierGroup(tier: UInt, config: TierConfig) {
 private fun runCommand(command: String) {
     Bukkit.getServer().dispatchCommand(Bukkit.getServer().consoleSender, command)
 }
+

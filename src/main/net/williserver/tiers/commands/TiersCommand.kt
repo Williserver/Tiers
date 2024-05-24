@@ -21,12 +21,14 @@ class TiersCommand(private val logger: LogHandler,
         if (args.isNotEmpty()) {
             when (args[0]) {
                 "get" -> get(sender, args)
+                "set" -> set(sender, args)
                 else -> false
             }
         } else false
 
     /**
      * Subfunction for get command.
+     * Format: /tiers get
      */
     private fun get(s: CommandSender, args: Array<String>): Boolean =
         if (args.size != 1) {
@@ -35,4 +37,24 @@ class TiersCommand(private val logger: LogHandler,
             s.sendMessage("[TIERS]: Server is on tier ${model.currentTier} with border width ${model.borderWidth()}.")
             true
         }
+
+    /**
+     * Subfunction for set command.
+     * Format: /tiers set
+     */
+    private fun set(s: CommandSender, args: Array<String>): Boolean {
+        if (args.size != 2) {
+            return false
+        } else {
+            val tier = args[1].toIntOrNull() ?: return false
+            if (tier < 1) {
+                s.sendMessage("[TIERS]: Tier must be greater than zero!")
+                return false
+            }
+
+            model.currentTier = tier.toUInt()
+            changeTier(model)
+            return true
+        }
+    }
 }
