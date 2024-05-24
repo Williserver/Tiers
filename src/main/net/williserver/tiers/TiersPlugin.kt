@@ -19,7 +19,8 @@ class TiersPlugin : JavaPlugin() {
     override fun onEnable() {
         // Load configuration options
         saveDefaultConfig()
-        val config = TierConfig(handler, config)
+        val luckPresent = server.pluginManager.getPlugin(luckName) != null
+        val config = TierConfig(handler, config, luckPresent)
 
         // Generate data model.
         model = TierModel(handler, config, path)
@@ -30,7 +31,7 @@ class TiersPlugin : JavaPlugin() {
         val useLuck = config.useRanks && server.pluginManager.getPlugin(luckName) != null
 
         // Add player join listener.
-        val joiner = JoinListener(handler, useLuck, model, config)
+        val joiner = JoinListener(handler, config, model)
         server.pluginManager.registerEvents(joiner, this)
         handler.info("Register tiers join listener.")
 

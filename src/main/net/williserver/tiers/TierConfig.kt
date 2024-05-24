@@ -7,9 +7,13 @@ import org.bukkit.configuration.file.FileConfiguration
  *
  * @param handler Logger
  * @param config Configuration file to parse options from.
+ * @param ranksPluginPresent Whether there is a backend plugin for our ranks to target.
  * @author Willmo3
  */
-data class TierConfig(private val handler: LogHandler, private val config: FileConfiguration) {
+data class TierConfig(private val handler: LogHandler,
+                      private val config: FileConfiguration,
+                      private val ranksPluginPresent: Boolean) {
+
     // ***** CONFIG FIELDS ***** //
     private val tierIntervalOption = "tierInterval"
     private val tierSizeOption = "tierSize"
@@ -57,7 +61,8 @@ data class TierConfig(private val handler: LogHandler, private val config: FileC
         }
 
         // Loading booleans defaults to false
-        useRanks = config.getBoolean(useRanksOption)
+        // NOTE: only use ranks if we've got a backend to target!
+        useRanks = config.getBoolean(useRanksOption) && ranksPluginPresent
         usePrefix = config.getBoolean(usePrefixOption)
     }
 }

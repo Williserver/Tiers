@@ -14,14 +14,13 @@ import org.bukkit.event.player.PlayerJoinEvent
  * @author Willmo3
  */
 class JoinListener(private val logger: LogHandler,
-                   private val useLuck: Boolean,
-                   private val model: TierModel,
-                   private val config: TierConfig): Listener {
+                   private val config: TierConfig,
+                   private val model: TierModel): Listener {
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {
         // Join player to rank if possible
-        if (useLuck) {
+        if (config.useRanks) {
             // attempt to create a tier group whenever a player joins.
             createTierGroup(model.currentTier, config)
             playerJoinTier(model.currentTier, e.player.name)
