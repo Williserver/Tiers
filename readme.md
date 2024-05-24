@@ -29,6 +29,12 @@ This option chooses whether to attempt to use tierRanks. Note that this will onl
 
 #### Default: True
 
+### usePrefix
+Whether to apply a LuckPerms prefix automatically using our format when players join. 
+Set this to false if you want to format your prefixes manually.
+
+#### Default: True
+
 ### trackName
 What track should we use to refer to our ranks in LuckPerms? Change this if you want to use the name "tiers"
 
