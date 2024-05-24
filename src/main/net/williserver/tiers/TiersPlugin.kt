@@ -1,6 +1,7 @@
 package net.williserver.tiers
 
 import net.williserver.tiers.commands.TiersCommand
+import net.williserver.tiers.commands.TiersTabCompleter
 import net.williserver.tiers.commands.setBorderWidth
 import net.williserver.tiers.listeners.JoinListener
 import net.williserver.tiers.model.TierConfig
@@ -39,6 +40,7 @@ class TiersPlugin : JavaPlugin() {
 
         // Register commands
         this.getCommand("tiers")!!.setExecutor(TiersCommand(handler, model))
+        this.getCommand("tiers")!!.tabCompleter = TiersTabCompleter()
 
         // If we get this far, plugin is successfully enabled!
         handler.info("Enabled")
