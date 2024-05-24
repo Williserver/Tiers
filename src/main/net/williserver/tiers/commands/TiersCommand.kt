@@ -1,7 +1,11 @@
 package net.williserver.tiers.commands
 
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextColor
 import net.williserver.tiers.LogHandler
 import net.williserver.tiers.model.TierModel
+import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -41,20 +45,34 @@ class TiersCommand(private val logger: LogHandler,
     /**
      * Subfunction for set command.
      * Format: /tiers set
+     *
+     * @param s Entity which sent the command.
+     * @param args Args to command.
      */
     private fun set(s: CommandSender, args: Array<String>): Boolean {
+        // Malformed command if incorrect arg count.
         if (args.size != 2) {
             return false
-        } else {
-            val tier = args[1].toIntOrNull() ?: return false
-            if (tier < 1) {
-                s.sendMessage("[TIERS]: Tier must be greater than zero!")
-                return false
-            }
+        }
 
-            model.currentTier = tier.toUInt()
-            changeTier(model)
+        // Returning true so that usage information is not displayed.
+        // Still exiting prematurely
+        if (!s.hasPermission("tiers.set")) {
+            s.sendMessage(
+                Component.text("[TIERS]: You do not have permission to set the tier!", NamedTextColor.RED))
             return true
         }
+
+        val tier = args[1].toIntOrNull() ?: return false
+        if (tier < 1) {
+            s.sendMessage(
+                Component.text("[TIERS]: Tier must be greater than zero!", NamedTextColor.RED))
+        } else {
+            model.currentTier = tier.toUInt()
+            changeTier(model)
+        }
+
+        return true
     }
+
 }
