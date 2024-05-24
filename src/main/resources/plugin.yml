@@ -16,4 +16,8 @@ permissions:
   tiers.inc:
     description: Allows /tiers inc
     default: op
+  tiers.dec:
+    description: Allows /tiers dec
+    default: op
+
   

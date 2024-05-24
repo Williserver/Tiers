@@ -24,6 +24,7 @@ class TiersCommand(private val logger: LogHandler,
                 "get" -> get(sender, args)
                 "set" -> set(sender, args)
                 "inc" -> inc(sender, args)
+                "dec" -> dec(sender, args)
                 else -> false
             }
         } else false
@@ -93,6 +94,7 @@ class TiersCommand(private val logger: LogHandler,
         help.append("-- /tiers get: get the current tier\n")
         help.append("-- /tiers set (value): set the tier to given value.\n")
         help.append("-- /tiers inc: increment the current tier.\n")
+        help.append("-- /tiers dec: decrement the current tier.\n")
 
         s.sendMessage(help.toString())
         return true
@@ -100,6 +102,7 @@ class TiersCommand(private val logger: LogHandler,
 
     /**
      * Increment the model value.
+     * Will not work if overflows.
      *
      * @param s Command sender.
      * @param args Args for command -- should be only one arg.
@@ -113,16 +116,51 @@ class TiersCommand(private val logger: LogHandler,
         // Still exiting prematurely
         if (!s.hasPermission("tiers.inc")) {
             s.sendMessage(
-                Component.text("[TIERS]: You do not have permission to increment the tier!", NamedTextColor.RED))
+                Component.text("[TIERS]: You do not have permission to increment the tier!",
+                    NamedTextColor.RED))
             return true
         }
 
         if (model.currentTier == UInt.MAX_VALUE) {
-            s.sendMessage(Component.text("[TIERS]: model has reached max width! Not incrementing."))
+            s.sendMessage(Component.text("[TIERS]: Model has reached max width! Not incrementing.",
+                NamedTextColor.RED))
             return true
         }
 
         model.incrementTier()
+        changeTier(model)
+        return true
+    }
+
+    /**
+     * Decrement the model value.
+     * Will not work if sets below 1.
+     *
+     * @param s Command sender.
+     * @param args Args for command -- should be only one arg.
+     */
+    private fun dec(s: CommandSender, args: Array<String>): Boolean {
+        if (args.size != 1) {
+            return false
+        }
+
+        // Returning true so that usage information is not displayed.
+        // Still exiting prematurely
+        if (!s.hasPermission("tiers.dec")) {
+            s.sendMessage(
+                Component.text("[TIERS]: You do not have permission to decrement the tier!",
+                    NamedTextColor.RED))
+            return true
+        }
+
+        if (model.currentTier == 1u) {
+            s.sendMessage(
+                Component.text("[TIERS]: Model has reached minimum width! Not decrementing.",
+                    NamedTextColor.RED))
+            return true
+        }
+
+        model.decrementTier()
         changeTier(model)
         return true
     }

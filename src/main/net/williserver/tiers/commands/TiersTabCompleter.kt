@@ -30,6 +30,7 @@ class TiersTabCompleter: TabCompleter {
             completions.add("set")
             completions.add("help")
             completions.add("inc")
+            completions.add("dec")
             completions.removeAll{ !it.startsWith(args[0].lowercase()) }
         }
 

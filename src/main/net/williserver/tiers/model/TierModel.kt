@@ -55,10 +55,19 @@ class TierModel(logger: LogHandler, private val config: TierConfig, private var 
      */
     fun borderWidth(): UInt = max(currentTier * config.tierSize.toUInt(), defaultWidth)
 
+    // TODO: change tier to add minimum
+
     /**
      * Increment the tier used in this model.
      */
     fun incrementTier() {
         currentTier += 1u
+    }
+
+    /**
+     * Decrement the tier used in this model.
+     */
+    fun decrementTier() {
+        currentTier -= 1u
     }
 }
