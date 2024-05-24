@@ -20,7 +20,7 @@ class TiersCommand(private val logger: LogHandler,
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean =
         if (args.isNotEmpty()) {
             when (args[0]) {
-                "get" -> get(sender)
+                "get" -> get(sender, args)
                 else -> false
             }
         } else false
@@ -28,8 +28,11 @@ class TiersCommand(private val logger: LogHandler,
     /**
      * Subfunction for get command.
      */
-    private fun get(s: CommandSender): Boolean {
-        s.sendMessage("[TIERS]: Server is on tier ${model.currentTier} with border width ${model.borderWidth()}.")
-        return true
-    }
+    private fun get(s: CommandSender, args: Array<String>): Boolean =
+        if (args.size != 1) {
+            false
+        } else {
+            s.sendMessage("[TIERS]: Server is on tier ${model.currentTier} with border width ${model.borderWidth()}.")
+            true
+        }
 }

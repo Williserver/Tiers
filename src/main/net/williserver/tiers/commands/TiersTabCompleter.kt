@@ -19,7 +19,7 @@ class TiersTabCompleter(): TabCompleter {
     ): MutableList<String> {
         val completions = mutableListOf<String>()
 
-        // Only listen for teirs command
+        // Only listen for tiers command
         if (!command.name.equals("tiers", ignoreCase = true)) {
             return completions
         }
