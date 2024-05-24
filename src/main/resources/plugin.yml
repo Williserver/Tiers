@@ -3,3 +3,10 @@ main: net.williserver.tiers.TiersPlugin
 version: 1.0
 api-version: 1.20
 softdepend: [LuckPerms]
+
+commands:
+  tiers:
+    description: Execute tiers function helpers.
+    usage: /tiers [get]
+    permission:
+  

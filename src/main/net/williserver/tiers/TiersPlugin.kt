@@ -1,5 +1,6 @@
 package net.williserver.tiers
 
+import net.williserver.tiers.commands.TiersCommand
 import net.williserver.tiers.commands.setBorderWidth
 import net.williserver.tiers.listeners.JoinListener
 import net.williserver.tiers.model.TierConfig
@@ -35,6 +36,9 @@ class TiersPlugin : JavaPlugin() {
         val joiner = JoinListener(handler, config, model)
         server.pluginManager.registerEvents(joiner, this)
         handler.info("Register tiers join listener.")
+
+        // Register commands
+        this.getCommand("tiers")!!.setExecutor(TiersCommand(handler, model))
 
         // If we get this far, plugin is successfully enabled!
         handler.info("Enabled")
