@@ -2,15 +2,11 @@ package net.williserver.tiers.commands
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
-import net.kyori.adventure.text.format.TextColor
 import net.williserver.tiers.LogHandler
 import net.williserver.tiers.model.TierModel
-import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
-import org.bukkit.command.TabCompleter
-import org.bukkit.entity.Player
 
 /**
  * Base tiers command.
@@ -27,6 +23,7 @@ class TiersCommand(private val logger: LogHandler,
                 "help" -> help(sender, args)
                 "get" -> get(sender, args)
                 "set" -> set(sender, args)
+                "inc" -> inc(sender, args)
                 else -> false
             }
         } else false
@@ -34,6 +31,9 @@ class TiersCommand(private val logger: LogHandler,
     /**
      * Subfunction for get command.
      * Format: /tiers get
+     *
+     * @param s Entity which sent the command.
+     * @param args Args to command -- should be one arg.
      */
     private fun get(s: CommandSender, args: Array<String>): Boolean =
         if (args.size != 1) {
@@ -48,7 +48,7 @@ class TiersCommand(private val logger: LogHandler,
      * Format: /tiers set
      *
      * @param s Entity which sent the command.
-     * @param args Args to command.
+     * @param args Args to command -- should be two args.
      */
     private fun set(s: CommandSender, args: Array<String>): Boolean {
         // Malformed command if incorrect arg count.
@@ -80,7 +80,7 @@ class TiersCommand(private val logger: LogHandler,
      * Give help information to sender.
      *
      * @param s Command Sender.
-     * @param args Args to command.
+     * @param args Args for command -- should be only one arg.
      */
     private fun help(s: CommandSender, args: Array<String>): Boolean {
         if (args.size != 1) {
@@ -91,9 +91,39 @@ class TiersCommand(private val logger: LogHandler,
         help.append("Tiers commands:\n")
         help.append("-- /tiers help: pull up this help menu\n")
         help.append("-- /tiers get: get the current tier\n")
-        help.append("-- /tiers set (value): set the tier to given value. Changes world border!\n")
+        help.append("-- /tiers set (value): set the tier to given value.\n")
+        help.append("-- /tiers inc: increment the current tier.\n")
 
         s.sendMessage(help.toString())
+        return true
+    }
+
+    /**
+     * Increment the model value.
+     *
+     * @param s Command sender.
+     * @param args Args for command -- should be only one arg.
+     */
+    private fun inc(s: CommandSender, args: Array<String>): Boolean {
+        if (args.size != 1) {
+            return false
+        }
+
+        // Returning true so that usage information is not displayed.
+        // Still exiting prematurely
+        if (!s.hasPermission("tiers.inc")) {
+            s.sendMessage(
+                Component.text("[TIERS]: You do not have permission to increment the tier!", NamedTextColor.RED))
+            return true
+        }
+
+        if (model.currentTier == UInt.MAX_VALUE) {
+            s.sendMessage(Component.text("[TIERS]: model has reached max width! Not incrementing."))
+            return true
+        }
+
+        model.incrementTier()
+        changeTier(model)
         return true
     }
 }
