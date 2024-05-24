@@ -9,15 +9,14 @@ import kotlin.math.max
 /**
  * The TierModel represents which tier we're in.
  *
- * @param tierInterval number of players per tier.
- * @param tierSize Size of a single tier
+ * @param config TierConfig to pull options from.
  * @param path Path to load saved data from, if it exists.
  *
  * @author Willmo3
  */
 
 // Data model: file abstraction
-class TierModel(logger: LogHandler, private val tierInterval: Int, private val tierSize: Int, private var path: String) {
+class TierModel(logger: LogHandler, private val config: TierConfig, private var path: String) {
     private val defaultTier = 1u
     private val defaultWidth = 1u
 
@@ -48,12 +47,12 @@ class TierModel(logger: LogHandler, private val tierInterval: Int, private val t
     /**
      * Return the number of players needed to reach the next tier.
      */
-    fun playersForNextTier(): UInt = currentTier * tierInterval.toUInt()
+    fun playersForNextTier(): UInt = currentTier * config.tierInterval.toUInt()
 
     /**
      * Get the border width for this tiermodel.
      */
-    fun borderWidth(): UInt = max(currentTier * tierSize.toUInt(), defaultWidth)
+    fun borderWidth(): UInt = max(currentTier * config.tierSize.toUInt(), defaultWidth)
 
     /**
      * Increment the tier used in this model.

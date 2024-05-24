@@ -22,7 +22,7 @@ class TiersPlugin : JavaPlugin() {
         val config = TierConfig(handler, config)
 
         // Generate data model.
-        model = TierModel(handler, config.tierInterval, config.tierSize, path)
+        model = TierModel(handler, config, path)
         // Set border width based on starting player count.
         setBorderWidth(model.borderWidth())
 
