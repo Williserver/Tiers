@@ -24,6 +24,7 @@ class TiersCommand(private val logger: LogHandler,
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean =
         if (args.isNotEmpty()) {
             when (args[0]) {
+                "help" -> help(sender, args)
                 "get" -> get(sender, args)
                 "set" -> set(sender, args)
                 else -> false
@@ -75,4 +76,24 @@ class TiersCommand(private val logger: LogHandler,
         return true
     }
 
+    /**
+     * Give help information to sender.
+     *
+     * @param s Command Sender.
+     * @param args Args to command.
+     */
+    private fun help(s: CommandSender, args: Array<String>): Boolean {
+        if (args.size != 1) {
+            return false
+        }
+
+        val help = StringBuilder()
+        help.append("Tiers commands:\n")
+        help.append("-- /tiers help: pull up this help menu\n")
+        help.append("-- /tiers get: get the current tier\n")
+        help.append("-- /tiers set (value): set the tier to given value. Changes world border!\n")
+
+        s.sendMessage(help.toString())
+        return true
+    }
 }
