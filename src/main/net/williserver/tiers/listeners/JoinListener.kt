@@ -1,7 +1,13 @@
-package net.williserver.tiers
+package net.williserver.tiers.listeners
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.williserver.tiers.*
+import net.williserver.tiers.commands.createTierGroup
+import net.williserver.tiers.commands.playerJoinTier
+import net.williserver.tiers.commands.setBorderWidth
+import net.williserver.tiers.model.TierConfig
+import net.williserver.tiers.model.TierModel
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -15,7 +21,8 @@ import org.bukkit.event.player.PlayerJoinEvent
  */
 class JoinListener(private val logger: LogHandler,
                    private val config: TierConfig,
-                   private val model: TierModel): Listener {
+                   private val model: TierModel
+): Listener {
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {

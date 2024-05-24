@@ -1,5 +1,6 @@
-package net.williserver.tiers
+package net.williserver.tiers.model
 
+import net.williserver.tiers.LogHandler
 import org.bukkit.configuration.file.FileConfiguration
 
 /**

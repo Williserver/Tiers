@@ -1,7 +1,8 @@
-package net.williserver.tiers
+package net.williserver.tiers.model
 
 import java.io.File
 import com.google.gson.Gson
+import net.williserver.tiers.LogHandler
 import java.io.FileReader
 import java.io.FileWriter
 import kotlin.math.max

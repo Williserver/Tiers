@@ -1,4 +1,5 @@
-package net.williserver.tiers
+package net.williserver.tiers.commands
+import net.williserver.tiers.model.TierConfig
 import org.bukkit.Bukkit
 
 /**
