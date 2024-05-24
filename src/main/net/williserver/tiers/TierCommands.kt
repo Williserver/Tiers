@@ -19,20 +19,19 @@ fun setBorderWidth(width: UInt) = runCommand("worldborder set $width")
  * Join a player in the specified tier.
  *
  * @param tier tier to add player to
- * @param player username of player
+ * @param username username of player
  */
-fun playerJoinTier(tier: UInt, player: String) = runCommand("lp user $player parent add t$tier")
+fun playerJoinTier(tier: UInt, username: String) = runCommand("lp user $username parent add t$tier")
 
 /**
  * Create a new tier group.
  *
  * @param tier Tier to use.
- * @param trackName Name of track for tiers.
- * @param usePrefix Whether to add a prefix to our group.
+ * @param config TierConfig to grab needed fields from.
  */
 fun createTierGroup(tier: UInt, config: TierConfig) {
     // Name of new group to be created.
-    val groupname = "t$tier"
+    val groupname = "T$tier"
 
     runCommand("lp creategroup $groupname")
     runCommand("lp track ${config.trackName} append $groupname")
