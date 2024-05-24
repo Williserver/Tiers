@@ -27,9 +27,6 @@ class TiersPlugin : JavaPlugin() {
         // Set border width based on starting player count.
         setBorderWidth(model.borderWidth())
 
-        // Luckperms Integration
-        val useLuck = config.useRanks && server.pluginManager.getPlugin(luckName) != null
-
         // Add player join listener.
         val joiner = JoinListener(handler, config, model)
         server.pluginManager.registerEvents(joiner, this)
