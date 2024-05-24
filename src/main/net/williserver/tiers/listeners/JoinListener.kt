@@ -2,7 +2,7 @@ package net.williserver.tiers.listeners
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
-import net.williserver.tiers.*
+import net.williserver.tiers.LogHandler
 import net.williserver.tiers.commands.createTierGroup
 import net.williserver.tiers.commands.playerJoinTier
 import net.williserver.tiers.commands.setBorderWidth
