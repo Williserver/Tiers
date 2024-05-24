@@ -7,6 +7,6 @@ softdepend: [LuckPerms]
 commands:
   tiers:
     description: Execute tiers function helpers.
-    usage: /tiers [get]
+    usage: "Usage: /tiers [get]"
     permission:
   
