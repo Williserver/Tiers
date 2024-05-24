@@ -4,7 +4,7 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 
-class TiersTabCompleter(): TabCompleter {
+class TiersTabCompleter: TabCompleter {
 
     /**
      * Tab completion for tiers command.
@@ -27,13 +27,9 @@ class TiersTabCompleter(): TabCompleter {
         // Add all possible suggestions for when the user hasn't typed anything.
         if (args.size == 1) {
             completions.add("get")
+            completions.removeAll{ !it.startsWith(args[0].lowercase()) }
         }
-
-        for (suggestion in completions) {
-            if (!suggestion.startsWith(args[0].lowercase())) {
-                completions.remove(suggestion)
-            }
-        }
+        
         return completions
     }
 }
