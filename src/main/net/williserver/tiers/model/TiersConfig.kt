@@ -8,7 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration
  * Interfaces into a read-only data class.
  *
  * @param handler Logger
- * @param config Configuration file to parse options from.
+ * @param fileConfig Configuration file to parse options from.
  * @param ranksPluginPresent Whether there is a backend plugin for our ranks to target.
  * @author Willmo3
  */
