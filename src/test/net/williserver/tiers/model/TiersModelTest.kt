@@ -43,4 +43,18 @@ class TiersModelTest {
         model.decrementTier()
         assertEquals(1u, model.currentTier)
     }
+
+    // Ensure model defaults to tier 1.
+    @Test
+    fun startingTierTooSmall() {
+        val model = TiersModel(logHandler, config, 0u)
+        assertEquals(1u, model.currentTier)
+    }
+
+    // Even if there's overflow!
+    @Test
+    fun startingTierOverflow() {
+        val model = TiersModel(logHandler, config, UInt.MAX_VALUE + 1u)
+        assertEquals(1u, model.currentTier)
+    }
 }
