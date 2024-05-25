@@ -19,9 +19,9 @@ import org.bukkit.event.player.PlayerJoinEvent
  *
  * @author Willmo3
  */
-class JoinListener(private val logger: LogHandler,
-                   private val config: TierConfig,
-                   private val model: TierModel): Listener {
+class TiersJoinListener(private val logger: LogHandler,
+                        private val config: TierConfig,
+                        private val model: TierModel): Listener {
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {
