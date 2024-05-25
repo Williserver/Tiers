@@ -17,7 +17,7 @@ import kotlin.math.max
  */
 
 // Data model: file abstraction
-class TierModel(logger: LogHandler, private val config: TierConfig, private var path: String) {
+class TierModel(private val logger: LogHandler, private val config: TierConfig, private var path: String) {
     private val defaultTier = 1u
     private val defaultWidth = 1u
 
@@ -55,19 +55,21 @@ class TierModel(logger: LogHandler, private val config: TierConfig, private var 
      */
     fun borderWidth(): UInt = max(currentTier * config.tierSize.toUInt(), defaultWidth)
 
-    // TODO: change tier to add minimum
+    /**
+     * Increment the tier used in this model if the tier is less than uint.max_value.
+     */
+    fun incrementTier() =
+        when (currentTier) {
+            UInt.MAX_VALUE -> logger.err("Tier has reached maximum uint value! Not incrementing to avoid overflow.")
+            else -> currentTier += 1u
+        }
 
     /**
-     * Increment the tier used in this model.
+     * Decrement the tier used in this model if the tier is greater than one.
      */
-    fun incrementTier() {
-        currentTier += 1u
-    }
-
-    /**
-     * Decrement the tier used in this model.
-     */
-    fun decrementTier() {
-        currentTier -= 1u
-    }
+    fun decrementTier() =
+        when (currentTier) {
+            1u -> logger.err("Tier has reached minimum value of 1. Not decrementing.")
+            else -> currentTier -= 1u
+        }
 }
