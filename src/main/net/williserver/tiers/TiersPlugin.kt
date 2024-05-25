@@ -6,6 +6,8 @@ import net.williserver.tiers.commands.setBorderWidth
 import net.williserver.tiers.listeners.TiersJoinListener
 import net.williserver.tiers.model.TiersConfig
 import net.williserver.tiers.model.TiersModel
+import net.williserver.tiers.model.deserialize
+import net.williserver.tiers.model.serialize
 import org.bukkit.plugin.java.JavaPlugin
 
 /**
@@ -29,7 +31,7 @@ class TiersPlugin : JavaPlugin() {
         val config = TiersConfig(handler, config, luckPresent)
 
         // Generate data model.
-        model = TiersModel(handler, config, path)
+        model = TiersModel(handler, config, deserialize(path))
         // Set border width based on starting player count.
         setBorderWidth(model.borderWidth())
 
@@ -48,7 +50,7 @@ class TiersPlugin : JavaPlugin() {
 
     override fun onDisable() {
         // Serialize model settings.
-        model.serialize()
+        serialize(model, path)
         handler.info("Wrote data")
         handler.info("Disabled")
     }

@@ -3,46 +3,32 @@ package net.williserver.tiers.model
 import java.io.File
 import com.google.gson.Gson
 import net.williserver.tiers.LogHandler
-import java.io.FileReader
 import java.io.FileWriter
 import kotlin.math.max
 
 /**
  * The TierModel represents which tier we're in.
  *
+ * @param logger Logging utility.
  * @param config TierConfig to pull options from.
- * @param path Path to load saved data from, if it exists.
+ * @param startingTier Tier to start this model on. Will be set to 1 if too low.
  *
  * @author Willmo3
  */
 
 // Data model: file abstraction
-class TiersModel(private val logger: LogHandler, private val config: TiersConfig, private var path: String) {
+class TiersModel(private val logger: LogHandler, private val config: TiersConfig, startingTier: UInt) {
     private val defaultTier = 1u
     private val defaultWidth = 1u
 
-    // If file doesn't exist, initialize default tier -- 1u
-    var currentTier: UInt =
-        if (File(path).exists()) {
-            Gson().fromJson(FileReader(path).readText(), UInt::class.java)
-        } else {
-            defaultTier
-        }
-        internal set
+    // If invalid tier supplied initialize, with default tier.
+    var currentTier: UInt = defaultTier
 
-    // On init, log tier being used.
     init {
+        if (startingTier > currentTier) {
+            currentTier = startingTier
+        }
         logger.info("Initialized with tier: $currentTier")
-    }
-
-    /**
-     * Serialize this file to our path.
-     */
-    fun serialize() {
-        // Open file.
-        val writer = FileWriter(path)
-        Gson().toJson(currentTier, writer)
-        writer.close()
     }
 
     /**
@@ -72,4 +58,31 @@ class TiersModel(private val logger: LogHandler, private val config: TiersConfig
             1u -> logger.err("Tier has reached minimum value of 1. Not decrementing.")
             else -> currentTier -= 1u
         }
+}
+
+// ***** FILE IO FNS ***** //
+
+/**
+ * Using Gson, load the current tier from a path.
+ *
+ * @param path file system path to read from.
+ * @return The tier to start a tier with.
+ */
+fun deserialize(path: String): UInt {
+    if (!File(path).exists()) {
+        return 1u
+    }
+    return Gson().fromJson(path, UInt::class.java)
+}
+
+/**
+ * Using Gson, write the current tier in json format to a file.
+ *
+ * @param model Model to serialize
+ * @param path Path to read from.
+ */
+fun serialize(model: TiersModel, path: String) {
+    val writer = FileWriter(path)
+    Gson().toJson(model.currentTier, writer)
+    writer.close()
 }
