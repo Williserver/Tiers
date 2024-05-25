@@ -78,8 +78,9 @@ class TiersConfigLoader(private val handler: LogHandler,
  * @param usePrefix Whether to apply a prefix
  * @param trackName Name of track to use.
  */
-data class TiersConfig(val tierInterval: Int,
-                       val tierSize: Int,
-                       val useRanks: Boolean,
-                       val usePrefix: Boolean,
-                       val trackName: String)
+data class TiersConfig(
+    val tierInterval: Int,
+    val tierSize: Int,
+    val useRanks: Boolean,
+    val usePrefix: Boolean,
+    val trackName: String)
