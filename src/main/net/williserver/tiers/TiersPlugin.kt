@@ -4,10 +4,7 @@ import net.williserver.tiers.commands.TiersCommand
 import net.williserver.tiers.commands.TiersTabCompleter
 import net.williserver.tiers.commands.setBorderWidth
 import net.williserver.tiers.listeners.TiersJoinListener
-import net.williserver.tiers.model.TiersConfig
-import net.williserver.tiers.model.TiersModel
-import net.williserver.tiers.model.deserialize
-import net.williserver.tiers.model.serialize
+import net.williserver.tiers.model.*
 import org.bukkit.plugin.java.JavaPlugin
 
 /**
@@ -28,7 +25,7 @@ class TiersPlugin : JavaPlugin() {
         // Load configuration options
         saveDefaultConfig()
         val luckPresent = server.pluginManager.getPlugin(luckName) != null
-        val config = TiersConfig(handler, config, luckPresent)
+        val config = TiersConfigLoader(handler, config, luckPresent).config
 
         // Generate data model.
         model = TiersModel(handler, config, deserialize(path))
