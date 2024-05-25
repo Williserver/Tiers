@@ -40,6 +40,18 @@ What track should we use to refer to our ranks in LuckPerms? Change this if you 
 
 #### Default: "tiers"
 
+## Commands
+- /tiers help:
+Get quick descriptions of all the tiers commands!
+- /tiers get:
+Get the current tier and the worldborder width.
+- /tiers inc:
+Increment the current tier. Requires perm tiers.inc
+- /tiers dec:
+Decrement the current tier, if the tier is greater than 1. Requires perm tiers.dec
+- /tiers set:
+Set the current tier to a positive value. Requires perm tiers.set
+
 ## Building
 
 Currently, I'm not distributing jars. You'll need to build from source.
