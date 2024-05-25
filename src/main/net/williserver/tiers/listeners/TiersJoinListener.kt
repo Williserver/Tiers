@@ -6,8 +6,8 @@ import net.williserver.tiers.LogHandler
 import net.williserver.tiers.commands.changeTier
 import net.williserver.tiers.commands.createTierGroup
 import net.williserver.tiers.commands.playerJoinTier
-import net.williserver.tiers.model.TierConfig
-import net.williserver.tiers.model.TierModel
+import net.williserver.tiers.model.TiersConfig
+import net.williserver.tiers.model.TiersModel
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -20,8 +20,8 @@ import org.bukkit.event.player.PlayerJoinEvent
  * @author Willmo3
  */
 class TiersJoinListener(private val logger: LogHandler,
-                        private val config: TierConfig,
-                        private val model: TierModel): Listener {
+                        private val config: TiersConfig,
+                        private val model: TiersModel): Listener {
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {

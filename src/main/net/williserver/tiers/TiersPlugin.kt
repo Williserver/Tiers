@@ -4,8 +4,8 @@ import net.williserver.tiers.commands.TiersCommand
 import net.williserver.tiers.commands.TiersTabCompleter
 import net.williserver.tiers.commands.setBorderWidth
 import net.williserver.tiers.listeners.TiersJoinListener
-import net.williserver.tiers.model.TierConfig
-import net.williserver.tiers.model.TierModel
+import net.williserver.tiers.model.TiersConfig
+import net.williserver.tiers.model.TiersModel
 import org.bukkit.plugin.java.JavaPlugin
 
 /**
@@ -18,7 +18,7 @@ class TiersPlugin : JavaPlugin() {
     // Default path for this baby.
     private val path = "$dataFolder/tiers.json"
     // Model initialized after config loaded.
-    private lateinit var model: TierModel
+    private lateinit var model: TiersModel
     // Name of LuckPerms plugin
     private val luckName = "LuckPerms"
 
@@ -26,10 +26,10 @@ class TiersPlugin : JavaPlugin() {
         // Load configuration options
         saveDefaultConfig()
         val luckPresent = server.pluginManager.getPlugin(luckName) != null
-        val config = TierConfig(handler, config, luckPresent)
+        val config = TiersConfig(handler, config, luckPresent)
 
         // Generate data model.
-        model = TierModel(handler, config, path)
+        model = TiersModel(handler, config, path)
         // Set border width based on starting player count.
         setBorderWidth(model.borderWidth())
 

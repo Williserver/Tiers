@@ -17,7 +17,7 @@ import kotlin.math.max
  */
 
 // Data model: file abstraction
-class TierModel(private val logger: LogHandler, private val config: TierConfig, private var path: String) {
+class TiersModel(private val logger: LogHandler, private val config: TiersConfig, private var path: String) {
     private val defaultTier = 1u
     private val defaultWidth = 1u
 

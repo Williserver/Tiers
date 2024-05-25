@@ -3,7 +3,7 @@ package net.williserver.tiers.commands
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.williserver.tiers.LogHandler
-import net.williserver.tiers.model.TierModel
+import net.williserver.tiers.model.TiersModel
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -15,7 +15,7 @@ import org.bukkit.command.CommandSender
  * @author Willmo3
  */
 class TiersCommand(private val logger: LogHandler,
-                   private val model: TierModel): CommandExecutor {
+                   private val model: TiersModel): CommandExecutor {
 
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean =
         if (args.isNotEmpty()) {

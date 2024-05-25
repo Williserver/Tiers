@@ -11,9 +11,9 @@ import org.bukkit.configuration.file.FileConfiguration
  * @param ranksPluginPresent Whether there is a backend plugin for our ranks to target.
  * @author Willmo3
  */
-data class TierConfig(private val handler: LogHandler,
-                      private val config: FileConfiguration,
-                      private val ranksPluginPresent: Boolean) {
+data class TiersConfig(private val handler: LogHandler,
+                       private val config: FileConfiguration,
+                       private val ranksPluginPresent: Boolean) {
 
     // ***** CONFIG FIELDS ***** //
     private val tierIntervalOption = "tierInterval"

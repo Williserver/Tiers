@@ -1,8 +1,8 @@
 package net.williserver.tiers.commands
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
-import net.williserver.tiers.model.TierConfig
-import net.williserver.tiers.model.TierModel
+import net.williserver.tiers.model.TiersConfig
+import net.williserver.tiers.model.TiersModel
 import org.bukkit.Bukkit
 
 /**
@@ -18,7 +18,7 @@ import org.bukkit.Bukkit
  *
  * @param model Model to use.
  */
-fun changeTier(model: TierModel) {
+fun changeTier(model: TiersModel) {
     // Increase radius of border to match.
     setBorderWidth(model.borderWidth())
     Bukkit.broadcast(Component.text("[TIERS]: Switching to tier ${model.currentTier}", NamedTextColor.DARK_RED))
@@ -45,7 +45,7 @@ fun playerJoinTier(tier: UInt, username: String) = runCommand("lp user $username
  * @param tier Tier to use.
  * @param config TierConfig to grab needed fields from.
  */
-fun createTierGroup(tier: UInt, config: TierConfig) {
+fun createTierGroup(tier: UInt, config: TiersConfig) {
     // Name of new group to be created.
     val groupname = "T$tier"
 
