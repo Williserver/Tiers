@@ -14,14 +14,14 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 
 /**
- * JoinListener.
+ * ThresholdJoinListener.
  * When a player joins, see if we've exceeded the minimum to progress to the next tier.
  *
  * @author Willmo3
  */
-class TiersJoinListener(private val logger: LogHandler,
-                        private val config: TiersConfig,
-                        private val model: TiersModel): Listener {
+class ThresholdJoinListener(private val logger: LogHandler,
+                            private val config: TiersConfig,
+                            private val model: TiersModel): Listener {
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {

@@ -25,8 +25,10 @@ class TiersModel(private val logger: LogHandler, private val config: TiersConfig
     var currentTier: UInt = defaultTier
 
     init {
+        println(startingTier)
+        println(currentTier)
         if (startingTier > defaultTier) {
-            currentTier = defaultTier
+            currentTier = startingTier
         }
         logger.info("Initialized with tier: $currentTier")
     }

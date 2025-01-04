@@ -3,7 +3,7 @@ package net.williserver.tiers
 import net.williserver.tiers.commands.TiersCommand
 import net.williserver.tiers.commands.TiersTabCompleter
 import net.williserver.tiers.commands.setBorderWidth
-import net.williserver.tiers.listeners.TiersJoinListener
+import net.williserver.tiers.listeners.ThresholdJoinListener
 import net.williserver.tiers.model.*
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -33,7 +33,7 @@ class TiersPlugin : JavaPlugin() {
         setBorderWidth(model.borderWidth())
 
         // Add player join listener.
-        val joiner = TiersJoinListener(handler, config, model)
+        val joiner = ThresholdJoinListener(handler, config, model)
         server.pluginManager.registerEvents(joiner, this)
         handler.info("Register tiers join listener.")
 
