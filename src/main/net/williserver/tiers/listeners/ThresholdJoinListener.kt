@@ -25,6 +25,12 @@ class ThresholdJoinListener(private val logger: LogHandler,
 
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {
+        /*
+        Note: to my knowledge, it is impossible to impose an order on listener execution.
+        This results in logic being duplicated between listeners, such as the rank creation logic.
+        Moving this logic into a separate listener would create race conditions.
+         */
+
         // Join player to rank if possible
         if (config.useRanks) {
             // attempt to create a tier group whenever a player joins.
