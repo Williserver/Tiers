@@ -1,23 +1,32 @@
 package net.williserver.tiers.model
 
-import java.io.File
-import com.google.gson.Gson
 import net.williserver.tiers.LogHandler
+import java.io.File
 import java.io.FileWriter
 import kotlin.math.max
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import java.io.FileReader
+
+/**
+ * TiersData collects all persistent data for tiers operation.
+ *
+ * @param currentTier Tier ccurrent server instance is running.
+ */
+@Serializable
+data class TiersData(val currentTier: UInt)
 
 /**
  * The TierModel represents which tier we're in.
  *
  * @param logger Logging utility.
  * @param config TierConfig to pull options from.
- * @param startingTier Tier to start this model on. Will be set to 1 if too low.
+ * @param data Starting data store.
  *
  * @author Willmo3
  */
-
 // Data model: file abstraction
-class TiersModel(private val logger: LogHandler, private val config: TiersConfig, startingTier: UInt) {
+class TiersModel(private val logger: LogHandler, private val config: TiersConfig, data: TiersData) {
     private val defaultTier = 1u
     private val defaultWidth = 1u
 
@@ -25,8 +34,8 @@ class TiersModel(private val logger: LogHandler, private val config: TiersConfig
     var currentTier: UInt = defaultTier
 
     init {
-        if (startingTier > defaultTier) {
-            currentTier = startingTier
+        if (data.currentTier > defaultTier) {
+            currentTier = data.currentTier
         }
         logger.info("Initialized with tier: $currentTier")
     }
@@ -68,11 +77,14 @@ class TiersModel(private val logger: LogHandler, private val config: TiersConfig
  * @param path file system path to read from.
  * @return The tier to start a tier with.
  */
-fun deserialize(path: String): UInt {
+fun deserialize(path: String): TiersData {
     if (!File(path).exists()) {
-        return 1u
+        return TiersData(1u)
     }
-    return Gson().fromJson(path, UInt::class.java)
+    val reader = FileReader(path)
+    val jsonString = reader.readText()
+    reader.close()
+    return Json.decodeFromString<TiersData>(jsonString)
 }
 
 /**
@@ -83,6 +95,6 @@ fun deserialize(path: String): UInt {
  */
 fun serialize(model: TiersModel, path: String) {
     val writer = FileWriter(path)
-    Gson().toJson(model.currentTier, writer)
+    writer.write(Json.encodeToString(TiersData(model.currentTier)))
     writer.close()
 }

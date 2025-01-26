@@ -23,7 +23,7 @@ class TiersModelTest {
     // Overflow test.
     @Test
     fun incrementTier() {
-        val model = TiersModel(logHandler, config, UInt.MAX_VALUE - 1u)
+        val model = TiersModel(logHandler, config, TiersData(UInt.MAX_VALUE - 1u))
 
         model.incrementTier()
         assertEquals(UInt.MAX_VALUE, model.currentTier)
@@ -35,7 +35,7 @@ class TiersModelTest {
     // Underflow test
     @Test
     fun decrementTier() {
-        val model = TiersModel(logHandler, config, 2u)
+        val model = TiersModel(logHandler, config, TiersData(2u))
 
         model.decrementTier()
         assertEquals(1u, model.currentTier)
@@ -47,14 +47,14 @@ class TiersModelTest {
     // Ensure model defaults to tier 1.
     @Test
     fun startingTierTooSmall() {
-        val model = TiersModel(logHandler, config, 0u)
+        val model = TiersModel(logHandler, config, TiersData(0u))
         assertEquals(1u, model.currentTier)
     }
 
     // Even if there's overflow!
     @Test
     fun startingTierOverflow() {
-        val model = TiersModel(logHandler, config, UInt.MAX_VALUE + 1u)
+        val model = TiersModel(logHandler, config, TiersData(UInt.MAX_VALUE + 1u))
         assertEquals(1u, model.currentTier)
     }
 }
