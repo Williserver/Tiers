@@ -4,13 +4,15 @@ Tiers is a Minecraft plugin for dynamically expanding the bounds of your world a
 
 A fundamental feature of Minecraft is resource management. Restrictive world borders are often used for this feature, but they often lead a stale, overcrowded as the population increases. What if world borders grew with the server? And what if they did it in a fun way? Enter Tiers! 
 
-Tiers rewards players for joining by unlocking new worldborder "tiers" when admin-specified player thresholds are met. For instance, the first time that twenty players get on a server concurrently, a new tier might be unlocked, permanently increasing the world border! Early members are rewarded with a rank to commemorate their longevity, and everyone gets to experience that first-day rush of discovery again -- on the very same server!
+Tiers rewards players for joining by unlocking new worldborder "tiers" when admin-specified player thresholds are met. For instance, when twenty players get on a server, a new tier might be unlocked, permanently increasing the world border! Early members are rewarded with a rank to commemorate their longevity, and everyone gets to experience that first-day rush of discovery again -- on the very same server!
 
 ## Configuration
+### onlineOnlyPlayers
+Whether Tiers should measure only *concurrent* online connections (onlineOnlyPlayers = true) or all unique joins (onlineOnlyPlayers = false).
+#### Default: false.
+
 ### tierInterval
 This option controls how many players need to join concurrently, per tier, to unlock the next tier. Whenever currentTier * tierInterval players join, a new server tier is unlocked and the world border expands!
-
-Importantly, TierInterval measures *concurrent connections*, not total unique logins.
 
 #### Default: 10
 By default, Tiers are unlocked in intervals of 10 players. This can be changed in config.yml.
