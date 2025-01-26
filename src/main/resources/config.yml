@@ -1,21 +1,32 @@
 # Tiers config
 
+# Should Tiers treat the threshold as number of unique players who have joined the server
+# Or number of players simultaneously online
+# i.e. increment when 10 players are on at once VS increment whenever the 10th unique player joins
+# Default: False (unique players)
+onlineOnlyIncrement: False
+
 # How many players need to join to increase a tier.
+# Default: 10
 tierInterval: 10
 
 # How many blocks to increase border radius by per tier.
+# Default: 1000
 tierSize: 1000
 
 # Should we try to use tier ranks with LuckPerms integration?
 # This entails adding a new track for tiers and ranks for the various tiers.
+# Default: True
 tierRanks: True
 
 # Should we automatically apply a prefix to new groups?
 # Disable if you want to manually format your group's prefixes.
+# Default: True
 usePrefix: True
 
 # For LuckPerms integration: what track should we place tier ranks in?
 # You should create this track yourself!
 # No need to modify if not using LuckPerms.
+# Default: "tiers"
 trackName: "tiers"
 

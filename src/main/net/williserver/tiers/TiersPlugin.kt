@@ -4,7 +4,6 @@ import net.williserver.tiers.commands.TiersCommand
 import net.williserver.tiers.commands.TiersTabCompleter
 import net.williserver.tiers.commands.setBorderWidth
 import net.williserver.tiers.listeners.ThresholdJoinListener
-import net.williserver.tiers.listeners.UniqueJoinListener
 import net.williserver.tiers.model.*
 import org.bukkit.plugin.java.JavaPlugin
 

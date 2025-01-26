@@ -17,6 +17,7 @@ class TiersConfigLoader(private val handler: LogHandler,
                        private val ranksPluginPresent: Boolean) {
 
     // ***** CONFIG FIELDS ***** //
+    private val onlineIncrementOption = "onlineOnlyIncrement"
     private val tierIntervalOption = "tierInterval"
     private val tierSizeOption = "tierSize"
     private val usePrefixOption = "usePrefix"
@@ -61,10 +62,11 @@ class TiersConfigLoader(private val handler: LogHandler,
 
         // Loading booleans defaults to false
         // NOTE: only use ranks if we've got a backend to target!
+        val onlineOnlyIncrement = fileConfig.getBoolean(onlineIncrementOption)
         val useRanks = fileConfig.getBoolean(useRanksOption) && ranksPluginPresent
         val usePrefix = fileConfig.getBoolean(usePrefixOption)
 
-        config = TiersConfig(tierInterval, tierSize, useRanks, usePrefix, trackName)
+        config = TiersConfig(onlineOnlyIncrement, tierInterval, tierSize, useRanks, usePrefix, trackName)
     }
 }
 
@@ -72,6 +74,7 @@ class TiersConfigLoader(private val handler: LogHandler,
  * TiersConfig data should be interfaced outside of File IO.
  * Therefore, TiersConfig class is passed as opposed to TiersConfigLoader.
  *
+ * @param onlineOnlyIncrement Whether threshold is met by simultaneously online players.
  * @param tierInterval Number of players to move to next tier.
  * @param tierSize Interval to increase width by
  * @param useRanks Whether to integrate with LuckPerms ranks.
@@ -80,6 +83,7 @@ class TiersConfigLoader(private val handler: LogHandler,
  */
 data class TiersConfig
 (
+    val onlineOnlyIncrement: Boolean,
     val tierInterval: Int,
     val tierSize: Int,
     val useRanks: Boolean,

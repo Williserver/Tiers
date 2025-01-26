@@ -39,16 +39,21 @@ class ThresholdJoinListener(private val logger: LogHandler,
         }
 
         // Increment the tier if player cap reached.
-        val numPlayers = Bukkit.getOnlinePlayers().size
-        logger.info("$numPlayers online")
+        val numPlayers = if (config.onlineOnlyIncrement) {
+            logger.info("${Bukkit.getOnlinePlayers().size} players online.")
+            Bukkit.getOnlinePlayers().size
+        } else {
+            logger.info("${Bukkit.getOfflinePlayers().size} players have joined.")
+            Bukkit.getOfflinePlayers().size
+        }
         logger.info("Need ${model.playersForNextTier()} players to unlock next tier")
 
         // Check if we need to increment the interval.
         if (numPlayers.toUInt() >= model.playersForNextTier()) {
             model.incrementTier()
-            logger.info("$numPlayers online. Tier ${model.currentTier} unlocked!")
+            logger.info("$numPlayers have joined. Tier ${model.currentTier} unlocked!")
 
-            Bukkit.broadcast(Component.text("[TIERS]: $numPlayers online. New tier unlocked!", NamedTextColor.DARK_RED))
+            Bukkit.broadcast(Component.text("[TIERS]: $numPlayers have joined. New tier unlocked!", NamedTextColor.DARK_RED))
             changeTier(model)
             Bukkit.broadcast(Component.text("[TIERS]: ${model.playersForNextTier()} players needed to reach tier ${model.currentTier + 1u}", NamedTextColor.DARK_RED))
         }

@@ -12,6 +12,7 @@ import kotlin.test.assertEquals
 class TiersModelTest {
     // Starter values
     private val config = TiersConfig(
+        onlineOnlyIncrement = false,
         1,
         1,
         useRanks = false,

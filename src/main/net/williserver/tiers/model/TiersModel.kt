@@ -11,7 +11,7 @@ import java.io.FileReader
 /**
  * TiersData collects all persistent data for tiers operation.
  *
- * @param currentTier Tier ccurrent server instance is running.
+ * @param currentTier Tier current server instance is running.
  */
 @Serializable
 data class TiersData(val currentTier: UInt)
