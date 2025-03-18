@@ -12,7 +12,7 @@ import java.io.FileReader
  * TiersData collects all persistent data for tiers operation.
  *
  * @param currentTier Tier current server instance is running.
- */
+     */
 @Serializable
 data class TiersData(val currentTier: UInt)
 
@@ -72,7 +72,7 @@ class TiersModel(private val logger: LogHandler, private val config: TiersConfig
 // ***** FILE IO FNS ***** //
 
 /**
- * Using Gson, load the current tier from a path.
+ * Load the current tier from a path.
  *
  * @param path file system path to read from.
  * @return The tier to start a tier with.
@@ -88,7 +88,7 @@ fun deserialize(path: String): TiersData {
 }
 
 /**
- * Using Gson, write the current tier in json format to a file.
+ * Write the current tier in json format to a file.
  *
  * @param model Model to serialize
  * @param path Path to read from.
