@@ -12,6 +12,9 @@ import org.bukkit.command.CommandSender
  * Base tiers command.
  * Called both to get current tier and modify tier.
  *
+ * @oaram logger Server logging manager
+ * @param model Underlying data model for tier
+ *
  * @author Willmo3
  */
 class TiersCommand(private val logger: LogHandler,
