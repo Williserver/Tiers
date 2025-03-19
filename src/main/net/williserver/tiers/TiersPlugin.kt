@@ -6,6 +6,7 @@ import net.williserver.tiers.commands.setBorderWidth
 import net.williserver.tiers.listeners.ThresholdJoinListener
 import net.williserver.tiers.model.*
 import org.bukkit.plugin.java.JavaPlugin
+import java.io.File
 
 /**
  * TiersPlugin. Allows for configurable rescaling of world border as more players join.
@@ -15,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin
 class TiersPlugin : JavaPlugin() {
     private val handler = LogHandler(super.getLogger())
     // Default path for this baby.
-    private val path = "$dataFolder/tiers.json"
+    private val path = "$dataFolder${File.separator}tiers.json"
     // Model initialized after config loaded.
     private lateinit var model: TiersModel
     // Name of LuckPerms plugin
