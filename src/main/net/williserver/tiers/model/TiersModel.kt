@@ -77,7 +77,7 @@ class TiersModel(private val logger: LogHandler, private val config: TiersConfig
  * @param path file system path to read from.
  * @return The tier to start a tier with.
  */
-fun deserialize(path: String): TiersData {
+fun readFromFile(path: String): TiersData {
     if (!File(path).exists()) {
         return TiersData(1u)
     }
@@ -93,7 +93,7 @@ fun deserialize(path: String): TiersData {
  * @param model Model to serialize
  * @param path Path to read from.
  */
-fun serialize(model: TiersModel, path: String) {
+fun writeToFile(model: TiersModel, path: String) {
     val writer = FileWriter(path)
     writer.write(Json.encodeToString(TiersData(model.currentTier)))
     writer.close()
