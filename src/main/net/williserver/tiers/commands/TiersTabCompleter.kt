@@ -9,6 +9,11 @@ class TiersTabCompleter: TabCompleter {
     /**
      * Tab completion for tiers command.
      *
+     * @param sender Entity which sent the command and will experience tab completion.
+     * @param command command being completed for; if not "tiers", this tab completer will ignore.
+     * @param alias Alternate name for command; unused.
+     * @param args Arguments passed to command.
+     *
      * @author Willmo3
      */
     override fun onTabComplete(
@@ -31,6 +36,7 @@ class TiersTabCompleter: TabCompleter {
             completions.add("inc")
             completions.add("dec")
             completions.add("set")
+            // Only add completions that correspond with the subcommand they're typing.
             completions.removeAll{ !it.startsWith(args[0].lowercase()) }
         }
 
