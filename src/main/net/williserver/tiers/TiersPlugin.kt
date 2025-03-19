@@ -29,7 +29,7 @@ class TiersPlugin : JavaPlugin() {
         val config = TiersConfigLoader(handler, config, luckPresent).config
 
         // Generate data model.
-        model = TiersModel(handler, config, deserialize("$dataFolder/tiers.json"))
+        model = TiersModel(handler, config, deserialize(path))
         // Set border width based on starting player count.
         setBorderWidth(model.borderWidth())
 
